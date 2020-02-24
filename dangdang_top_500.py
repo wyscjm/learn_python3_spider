@@ -14,8 +14,17 @@ def request_dandan(url):
 
 def parse_result(html):
     pattern = re.compile(
-        '<li>.*?list_num.*?(\d+).</div>.*?<img src="(.*?)".*?class="name".*?title="(.*?)">.*?class="star">.*?class="tuijian">(.*?)</span>.*?class="publisher_info">.*?target="_blank">(.*?)</a>.*?class="biaosheng">.*?<span>(.*?)</span></div>.*?<p><span\sclass="price_n">¥(.*?)</span>.*?</li>',
+        '<li>.*?list_num.*?(\d+).</div>.*?'
+        '<img src="(.*?)".*?'
+        'class="name".*?title="(.*?)">.*?'
+        'class="star".*?class="tuijian">(.*?)</span>.*?'
+	'class="publisher_info">.*?target="_blank">(.*?)</a>.*?'
+	'class="biaosheng">.*?<span>(.*?)</span>.*?'
+	'class="price_n">.*?(\d+\.\d{0,2})</span>.*?'
+        '</li>',
         re.S)
+
+    #'class="star">.*?class="tuijian">(.*?)</span>.*?class="publisher_info">.*?target="_blank">(.*?)</a>.*?class="biaosheng">.*?<span>(.*?)</span></div>.*?<p><span\sclass="price_n">¥(.*?)</span>'
     items = re.findall(pattern, html)
 
     for item in items:
